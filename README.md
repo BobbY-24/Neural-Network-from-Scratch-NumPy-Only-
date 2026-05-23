@@ -1,128 +1,77 @@
-🧠 Neural Network from Scratch (NumPy Only)
-This project is a hand-built neural network for handwritten digit classification on the MNIST dataset, inspired by the YouTube video “Building a Neural Network FROM SCRATCH (no Tensorflow/PyTorch, just NumPy & math)” by Samson Zhang.
-The goal is to fully understand the mechanics of forward propagation, backward propagation, gradient descent, and prediction without relying on deep learning frameworks like TensorFlow or PyTorch.
-
-🚀 Features
-Implements a 2-layer neural network using only NumPy.
-
-
-Covers:
-
-
-Forward propagation
-
-
-Backward propagation
-
-
-Weight updates via gradient descent
-
-
-Activation functions: ReLU, Softmax, Sigmoid, Tanh
-
-
-Loss calculation (Cross-Entropy Loss)
-
-
-Prediction and evaluation functions
-
-
-Visualizes predictions with matplotlib.
-
-
-Supports showing multiple random test samples with predicted labels.
-
-
-
-📊 Training Results
-Example training output:
-Iteration 0   → Training Accuracy: 0.0924
-Iteration 50  → Training Accuracy: 0.2452
-Iteration 100 → Training Accuracy: 0.4828
-Iteration 150 → Training Accuracy: 0.7061
-Iteration 200 → Training Accuracy: 0.7871
-Iteration 250 → Training Accuracy: 0.8231
-Iteration 300 → Training Accuracy: 0.8472
-Iteration 350 → Training Accuracy: 0.8653
-Iteration 400 → Training Accuracy: 0.8788
-Iteration 450 → Training Accuracy: 0.8868
-
-✅ Final Dev Set Accuracy: ~89.8%
-
-📂 Project Structure
-├── neural_network.py   # main implementation
-├── utils.py            # helper functions (prediction, visualization, etc.)
-├── README.md           # project description
-└── data/               # MNIST dataset (train & dev set)
-
-
-⚙️ How It Works
-Input Layer: Flattens 28x28 MNIST images → 784 features.
-
-
-Hidden Layer: Fully connected, ReLU activation.
-
-
-Output Layer: 10 neurons, Softmax activation (digits 0–9).
-
-
-Training: Uses cross-entropy loss and gradient descent.
-
-
-Evaluation: Accuracy on both training and dev set.
-
-
-Visualization: Display random predictions with matplotlib.
-
-
-
-🔧 Requirements
-Python 3.x
-
-
-NumPy
-
-
-Matplotlib
-
-
-Install dependencies:
-pip install numpy matplotlib
-
-
-▶️ Run the Project
-python neural_network.py
-
-To visualize predictions:
-test_multiple_predictions(W1, b1, W2, b2, num_images=5)
-
-
-🧩 Key Concepts Learned
-Activation functions (ReLU, Sigmoid, Tanh, Softmax)
-
-
-One-hot encoding for labels
-
-
-Forward and backward propagation
-
-
-Gradient descent parameter updates
-
-
-Loss functions and optimization
-
-
-Cross-validation for model evaluation
-
-
-
-🙌 Acknowledgments
-Tutorial by Samson Zhang on YouTube.
-
-
-MNIST dataset.
-
-
-
-
+# Neural Network from Scratch with NumPy
+
+## Overview
+This project implements a small neural network for handwritten digit classification using NumPy only. The notebook builds the core learning algorithm directly: forward propagation, activation functions, backpropagation, gradient descent, prediction, and evaluation. The goal is to understand the mechanics behind neural networks without relying on TensorFlow or PyTorch.
+
+## Motivation
+For an AI research-oriented portfolio, this project is valuable because it demonstrates implementation-level understanding rather than only library usage. Rebuilding a neural network from basic array operations helps clarify gradients, loss functions, parameter updates, and the role of activation functions. This is a useful foundation for later work in deep learning, robustness, and model evaluation.
+
+## Dataset
+- **Source:** Kaggle Digit Recognizer / MNIST-style handwritten digit dataset.
+- **File:** `data/mnist_train.zip`
+- **Expected extracted file:** `data/train.csv`
+- **Target variable:** digit label from `0` to `9`.
+- **Important features:** flattened 28x28 grayscale pixel values.
+- **Dataset size:** TODO: add dataset size after rerunning notebook.
+- **Known limitations:** This is a clean benchmark dataset and does not reflect harder real-world vision settings such as distribution shift, noisy labels, rotated digits, or adversarial examples.
+
+## Methods
+- Loaded handwritten digit data from CSV.
+- Normalized pixel values for training.
+- Implemented a two-layer neural network with NumPy.
+- Implemented ReLU and softmax activations.
+- Used one-hot encoding for labels.
+- Implemented forward propagation, backpropagation, and gradient descent.
+- Evaluated model accuracy on a development set.
+- Visualized predictions with matplotlib.
+
+## Results
+The notebook reports the following training progression:
+
+| Iteration | Training Accuracy |
+| ---: | ---: |
+| 0 | 0.0924 |
+| 50 | 0.2452 |
+| 100 | 0.4828 |
+| 150 | 0.7061 |
+| 200 | 0.7871 |
+| 250 | 0.8231 |
+| 300 | 0.8472 |
+| 350 | 0.8653 |
+| 400 | 0.8788 |
+| 450 | 0.8868 |
+
+Final reported development set accuracy: **0.898**.
+
+## Key Insights
+- Implementing backpropagation directly makes the learning process more transparent.
+- A small NumPy-only network can reach reasonable performance on a clean digit benchmark.
+- Accuracy improves steadily over training iterations, showing that the gradient updates are working.
+- Framework-free implementation is useful for learning, but modern deep learning work should use tested libraries for larger experiments.
+
+## Limitations
+- The implementation is educational and not optimized for speed or scale.
+- The project does not yet compare against logistic regression, scikit-learn baselines, or PyTorch implementations.
+- The dataset must be manually extracted from `data/mnist_train.zip` before running.
+- The notebook uses a single split and does not report confidence intervals.
+- The project does not test robustness to noise, rotations, or distribution shift.
+
+## Future Improvements
+- Extract reusable functions into `src/neural_network.py`.
+- Add tests for activation functions, one-hot encoding, and gradient shapes.
+- Compare performance against scikit-learn and PyTorch baselines.
+- Add experiments on noisy or shifted digit images.
+- Add a concise technical writeup explaining the math behind backpropagation.
+
+## How to Run
+```bash
+git clone https://github.com/BobbY-24/Neural-Network-from-Scratch-NumPy-Only-.git
+cd Neural-Network-from-Scratch-NumPy-Only-
+python -m venv .venv
+source .venv/bin/activate  # macOS/Linux
+pip install -r requirements.txt
+unzip data/mnist_train.zip -d data/
+jupyter notebook notebooks/neural_network_from_scratch.ipynb
+```
+
+Run the notebook cells from top to bottom. The notebook expects the extracted dataset at `data/train.csv`.
