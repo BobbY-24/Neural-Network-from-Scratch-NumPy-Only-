@@ -1,55 +1,114 @@
 # Neural Network from Scratch with NumPy
 
 ## Overview
-I implemented a small neural network for handwritten digit classification using NumPy only. The notebook builds the core learning algorithm directly: forward propagation, activation functions, backpropagation, gradient descent, prediction, and evaluation.
+
+I implemented a two-layer neural network for MNIST-style handwritten digit classification using NumPy only. The repository is now organized as a small ML foundations project with reusable source code, a training entrypoint, tests, documentation, and a notebook preserving the original learning workflow.
 
 ## Motivation
-I consider this one of my strongest portfolio projects because it shows implementation-level understanding instead of only library usage. Rebuilding a neural network from array operations helped me understand gradients, loss functions, parameter updates, and activation functions.
 
-## Dataset
-- **Source:** Kaggle Digit Recognizer / MNIST-style handwritten digit dataset.
-- **File:** `data/mnist_train.zip`
-- **Expected extracted file:** `data/train.csv`
-- **Target variable:** digit label from `0` to `9`.
-- **Important features:** flattened 28x28 grayscale pixel values.
-- **Known limitations:** I use a clean benchmark dataset here and does not test harder vision settings such as noisy labels, rotations, or distribution shift.
+I built this project to understand neural networks below the framework level. Instead of relying on PyTorch or TensorFlow, I implemented forward propagation, backpropagation, gradient descent, ReLU, softmax, and cross-entropy directly with array operations.
 
-## Methods
-- I loaded handwritten digit data from CSV.
-- I normalized pixel values for training.
-- I implemented a two-layer neural network with NumPy.
-- I implemented ReLU and softmax activations.
-- I used one-hot encoding for labels.
-- I implemented forward propagation, backpropagation, and gradient descent.
-- I evaluated accuracy on a development set.
+## Objective
+
+The goal of this project is to demonstrate a clear, reproducible NumPy-only implementation of a basic neural network for digit classification.
+
+## Contributions
+
+- Implemented a two-layer neural network with NumPy.
+- Extracted reusable model, utility, and training code into `src/`.
+- Added tests for softmax, forward-pass dimensions, finite loss, and dummy training.
+- Documented data setup, methodology, limitations, and current results.
+- Preserved the original notebook as part of the learning process.
+
+## Repository Structure
+
+```text
+.
+├── README.md
+├── src/
+│   ├── __init__.py
+│   ├── neural_network.py
+│   ├── train.py
+│   └── utils.py
+├── notebooks/
+│   └── mnist_neural_network_from_scratch.ipynb
+├── data/
+│   └── README.md
+├── results/
+│   └── README.md
+├── docs/
+│   ├── audit.md
+│   ├── methodology.md
+│   └── limitations.md
+├── tests/
+│   └── test_neural_network.py
+├── requirements.txt
+├── .gitignore
+└── LICENSE
+```
+
+## Methodology
+
+I use the Kaggle Digit Recognizer / MNIST-style CSV format. The preprocessing step separates labels from pixel columns and normalizes pixel values by dividing by 255.
+
+The neural network uses:
+
+- input layer with 784 pixel features,
+- one hidden layer with ReLU activation,
+- output layer with softmax activation,
+- cross-entropy loss,
+- full-batch gradient descent.
 
 ## Results
-My notebook reports steady training improvement over 500 iterations and a final development set accuracy of **0.898**.
 
-## Key Insights
-- Implementing backpropagation directly made the learning process much more transparent.
-- A small NumPy-only network can reach reasonable performance on a clean digit benchmark.
-- Framework-free implementation is useful for learning, while larger experiments should use tested deep learning libraries.
+The original notebook reports a preliminary development accuracy of **0.898** after 500 training iterations. I label this as preliminary because I have not added repeated runs, confidence intervals, or baseline comparisons yet.
 
-## Limitations
-- The implementation is educational and not optimized for speed or scale.
-- I do not compare against scikit-learn or PyTorch baselines yet.
-- The dataset must be extracted from `data/mnist_train.zip` before running.
-- I do not test robustness to noise, rotations, or distribution shift.
+## Reproducibility
 
-## Future Improvements
-- Extract reusable functions into `src/neural_network.py`.
-- Add tests for activation functions, one-hot encoding, and gradient shapes.
-- Compare performance against scikit-learn and PyTorch baselines.
-- Add experiments on noisy or shifted digit images.
-
-## How to Run
 ```bash
 git clone https://github.com/BobbY-24/Neural-Network-from-Scratch-NumPy-Only-.git
 cd Neural-Network-from-Scratch-NumPy-Only-
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-unzip data/mnist_train.zip -d data/
-jupyter notebook notebooks/neural_network_from_scratch.ipynb
 ```
+
+Download the Kaggle Digit Recognizer training CSV and place it at:
+
+```text
+data/train.csv
+```
+
+Train from the command line:
+
+```bash
+python -m src.train
+```
+
+Run tests:
+
+```bash
+pytest
+```
+
+Open the notebook:
+
+```bash
+jupyter notebook notebooks/mnist_neural_network_from_scratch.ipynb
+```
+
+## Limitations
+
+- I use a simple architecture for educational clarity.
+- The training loop is not optimized for speed.
+- I have not added baseline comparisons against scikit-learn or PyTorch.
+- The current evaluation uses a simple development split.
+- The project does not test robustness to noisy, rotated, or shifted digit images.
+
+## Future Work
+
+- Update the notebook to import the reusable `src/` implementation.
+- Add mini-batch gradient descent.
+- Save training history to `results/`.
+- Add baseline model comparisons.
+- Add robustness experiments with perturbed digit images.

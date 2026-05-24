@@ -4,3 +4,7 @@ venv/
 __pycache__/
 .ipynb_checkpoints/
 *.pyc
+.env
+*.log
+data/train.csv
+*.zip
