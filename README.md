@@ -1,24 +1,35 @@
-# Neural Network from Scratch with NumPy
+# NumPy Neural Network For MNIST-Style Digit Classification
 
-## Overview
+Two-layer neural network for MNIST-style digit classification implemented from scratch with NumPy.
 
-I implemented a two-layer neural network for MNIST-style handwritten digit classification using NumPy only. The repository is now organized as a small ML foundations project with reusable source code, a training entrypoint, tests, documentation, and a notebook preserving the original learning workflow.
+This repository demonstrates the mechanics of neural networks below the framework level: forward propagation, backpropagation, ReLU, softmax, cross-entropy, gradient descent, data preprocessing, testing, and methodological documentation.
 
 ## Motivation
 
-I built this project to understand neural networks below the framework level. Instead of relying on PyTorch or TensorFlow, I implemented forward propagation, backpropagation, gradient descent, ReLU, softmax, and cross-entropy directly with array operations.
+The goal is to show implementation-level understanding of basic neural network training without relying on PyTorch, TensorFlow, or scikit-learn model abstractions.
 
-## Objective
+## What Is Included
 
-The goal of this project is to demonstrate a clear, reproducible NumPy-only implementation of a basic neural network for digit classification.
+- reusable NumPy model implementation
+- command-line training entrypoint
+- data loading and preprocessing helpers
+- tests for core mathematical behavior
+- methodology, limitations, and audit documentation
+- preserved notebook from the original learning workflow
 
-## Contributions
+## Model
 
-- Implemented a two-layer neural network with NumPy.
-- Extracted reusable model, utility, and training code into `src/`.
-- Added tests for softmax, forward-pass dimensions, finite loss, and dummy training.
-- Documented data setup, methodology, limitations, and current results.
-- Preserved the original notebook as part of the learning process.
+The network uses:
+
+- 784 input features
+- one hidden layer with ReLU activation
+- 10-way softmax output
+- cross-entropy loss
+- full-batch gradient descent
+
+## Preliminary Result
+
+The original notebook reports preliminary development accuracy of `0.898` after 500 training iterations. This should be treated as a development result, not a benchmark claim, because the repository does not yet include repeated runs, confidence intervals, or baseline comparisons.
 
 ## Repository Structure
 
@@ -26,42 +37,23 @@ The goal of this project is to demonstrate a clear, reproducible NumPy-only impl
 .
 ├── README.md
 ├── src/
-│   ├── __init__.py
 │   ├── neural_network.py
 │   ├── train.py
 │   └── utils.py
 ├── notebooks/
 │   └── mnist_neural_network_from_scratch.ipynb
-├── data/
-│   └── README.md
-├── results/
-│   └── README.md
 ├── docs/
 │   ├── audit.md
 │   ├── methodology.md
 │   └── limitations.md
+├── data/
+│   └── README.md
+├── results/
+│   └── README.md
 ├── tests/
 │   └── test_neural_network.py
-├── requirements.txt
-├── .gitignore
-└── LICENSE
+└── requirements.txt
 ```
-
-## Methodology
-
-I use the Kaggle Digit Recognizer / MNIST-style CSV format. The preprocessing step separates labels from pixel columns and normalizes pixel values by dividing by 255.
-
-The neural network uses:
-
-- input layer with 784 pixel features,
-- one hidden layer with ReLU activation,
-- output layer with softmax activation,
-- cross-entropy loss,
-- full-batch gradient descent.
-
-## Results
-
-The original notebook reports a preliminary development accuracy of **0.898** after 500 training iterations. I label this as preliminary because I have not added repeated runs, confidence intervals, or baseline comparisons yet.
 
 ## Reproducibility
 
@@ -79,7 +71,7 @@ Download the Kaggle Digit Recognizer training CSV and place it at:
 data/train.csv
 ```
 
-Train from the command line:
+Train:
 
 ```bash
 python -m src.train
@@ -91,24 +83,19 @@ Run tests:
 pytest
 ```
 
-Open the notebook:
-
-```bash
-jupyter notebook notebooks/mnist_neural_network_from_scratch.ipynb
-```
-
 ## Limitations
 
-- I use a simple architecture for educational clarity.
-- The training loop is not optimized for speed.
-- I have not added baseline comparisons against scikit-learn or PyTorch.
-- The current evaluation uses a simple development split.
-- The project does not test robustness to noisy, rotated, or shifted digit images.
+- educational implementation rather than a production framework
+- full-batch gradient descent is slow for larger datasets
+- no repeated runs or confidence intervals yet
+- no logistic regression, scikit-learn, or PyTorch baselines yet
+- no robustness testing on noisy, rotated, shifted, or adversarial images yet
 
-## Future Work
+## Roadmap
 
-- Update the notebook to import the reusable `src/` implementation.
-- Add mini-batch gradient descent.
-- Save training history to `results/`.
-- Add baseline model comparisons.
-- Add robustness experiments with perturbed digit images.
+- update notebook to import the reusable `src/` implementation
+- add mini-batch gradient descent
+- save training history to `results/`
+- add baseline comparisons
+- add robustness experiments
+- add gradient-checking tests
